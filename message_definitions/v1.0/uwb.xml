@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<mavlink>
+  <include>common.xml</include>
+  <enums>
+  </enums>
+  <messages>
+    <message id="13062509" name="UWB_RANGING">
+      <description>Message used to stream ranging results. Contains up to 15 measurements.</description>
+      <field type="uint32_t" name="base_time">Base time for measurements, milliseconds elapsed since ranging start.</field>
+      <field type="uint8_t" name="count">Number of measurements present.</field>
+      <field type="uint8_t[15]" name="device_a">System ID of the first device for every measurement.</field>
+      <field type="uint8_t[15]" name="device_b">System ID of the second device for every measurement.</field>
+      <field type="uint8_t[15]" name="time_offset">Relative offset for a measurement to the base_time, in milliseconds.</field>
+      <field type="int32_t[15]" name="dist">Measured distance in mm.</field>
+    </message>
+    <message id="13062510" name="UWB_RANGING_PACKED">
+      <description>Message used to stream ranging results. Contains up to 15 measurements.</description>
+      <field type="uint32_t" name="base_time">Base time for measurements, milliseconds elapsed since ranging start.</field>
+      <field type="int8_t[90]" name="data">Sequence of 6 byte elements, repeated for every measurement: [time_offset_ms, device_a, device_b, distance_cm, distance_cm >> 8, distance_cm >> 16]. Sequence end is marked by device_a == 0.</field>
+    </message>
+    <message id="13062511" name="UWB_RANGING_DEBUG">
+      <description>Message used to stream ranging results. Contains up to 15 measurements.</description>
+      <field type="uint32_t" name="base_time">Base time for measurements, milliseconds elapsed since ranging start.</field>
+      <field type="int8_t[165]" name="data">Sequence of 11 byte elements, repeated for every measurement: [time_offset_ms, device_a, device_b, distance_cm, distance_cm >> 8, distance_cm >> 16, ppb_difference, ppb_difference >> 8, velocity_cm, velocity_cm >> 8, nlos_avg]. Sequence end is marked by device_a == 0.</field>
+    </message>
+  </messages>
+</mavlink>
