@@ -15,13 +15,27 @@
     </message>
     <message id="13062510" name="UWB_RANGING_PACKED">
       <description>Message used to stream ranging results. Contains up to 15 measurements.</description>
-      <field type="uint32_t" name="base_time">Base time for measurements, milliseconds elapsed since ranging start.</field>
+      <field type="uint32_t" name="base_time">Base time for measurements, milliseconds elapsed since the device clock start.</field>
       <field type="int8_t[90]" name="data">Sequence of 6 byte elements, repeated for every measurement: [time_offset_ms, device_a, device_b, distance_cm, distance_cm >> 8, distance_cm >> 16]. Sequence end is marked by device_a == 0.</field>
     </message>
     <message id="13062511" name="UWB_RANGING_DEBUG">
       <description>Message used to stream ranging results. Contains up to 15 measurements.</description>
-      <field type="uint32_t" name="base_time">Base time for measurements, milliseconds elapsed since ranging start.</field>
+      <field type="uint32_t" name="base_time">Base time for measurements, milliseconds elapsed since the device clock start.</field>
       <field type="int8_t[165]" name="data">Sequence of 11 byte elements, repeated for every measurement: [time_offset_ms, device_a, device_b, distance_cm, distance_cm >> 8, distance_cm >> 16, ppb_difference, ppb_difference >> 8, velocity_cm, velocity_cm >> 8, nlos_avg]. Sequence end is marked by device_a == 0.</field>
+    </message>
+    <message id="13062512" name="UWB_POSITIONING_REFERENCE">
+      <description>Message used to specify current reference coordinates for a single device.</description>
+      <field type="uint32_t" name="time">Reference time, milliseconds elapsed since the device clock start.</field>
+      <field type="uint32_t" name="ref_type">Reference type. 0 - no reference, 1 - static reference in the shared frame of reference, 2 - reference in a moving frame of reference, 3 - reference provided by an external positioning device.</field>
+      <field type="uint32_t" name="msb">Precision specification in the form of available most significant bits per every of the six measured values. The lowest 5 bits of 'msb' specify the number of significant bits in X value starting from the most significant bit, the bits 5-10 specify it for the Y value, etc. </field>
+      <field type="int32_t[6]" name="data">Array of 6 elements: coordinates (0-2) X, Y, Z and then velocities (3-5) VX, VY, VZ. [mm, mm, mm, mm/s, mm/s, mm/s] correspondingly.</field>
+    </message>
+    <message id="13062513" name="UWB_POSITIONING">
+      <description>Message used to stream positioning results. Contains single position measurement.</description>
+      <field type="uint32_t" name="time">Measurement time, milliseconds elapsed since the device clock start.</field>
+      <field type="uint16_t" name="device">Device ID.</field>
+      <field type="uint32_t" name="msb">Precision specification in the form of available most significant bits per every of the six measured values. The lowest 5 bits of 'msb' specify number of significant bits in X value starting from the most significant bit, the bits 5-10 specify it for the Y value, etc. </field>
+      <field type="int32_t[6]" name="data">Array of 6 elements: coordinates X, Y, Z and then velocities VX, VY, VZ. mm, mm/s correspondingly.</field>
     </message>
   </messages>
 </mavlink>
