@@ -44,5 +44,13 @@
       <field type="uint8_t" name="n_devices">Maximum device count of this network (N). The table holds N*(N-1) elements.</field>
       <field type="uint8_t[240]" name="data">One byte per directed pair, in ascending index order, index = receiver_index * (N-1) + (sender_index less than receiver_index ? sender_index : sender_index - 1), where receiver_index and sender_index are device orders minus 1. Decoded back as: receiver_index = index / (N-1), remainder = index % (N-1), sender_index = remainder if remainder is less than receiver_index, otherwise remainder + 1. Measured values are stored as value + 1, clamped to 0xFF, so decode them as data - 1. 0x00 - this device has no samples for that pair.</field>
     </message>
+    <message id="13062515" name="UWB_CIR">
+      <description>CIR RX data starting from given index.</description>
+      <field type="uint32_t" name="time">Device time, milliseconds elapsed since the device clock start.</field>
+      <field type="uint16_t" name="device">ID of device the sample was received from.</field>
+      <field type="uint16_t" name="start_index">CIR sampled section start index.</field>
+      <field type="uint16_t" name="fp_index">Reported first path index.</field>
+      <field type="uint16_t[112]" name="data">CIR data</field>
+    </message>
   </messages>
 </mavlink>
