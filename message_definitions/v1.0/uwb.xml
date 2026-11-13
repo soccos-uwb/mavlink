@@ -48,6 +48,7 @@
       <description>CIR RX data starting from given index.</description>
       <field type="uint32_t" name="time">Device time, milliseconds elapsed since the device clock start.</field>
       <field type="uint32_t" name="car_int">Carrier integrator.</field>
+      <field type="uint32_t" name="agc">Metrics data.</field>
       <field type="uint16_t" name="device">ID of device the sample was received from.</field>
       <field type="uint16_t" name="start_index">CIR sampled section start index.</field>
       <field type="uint16_t" name="fp_index">Reported first path index.</field>
